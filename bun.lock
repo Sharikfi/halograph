@@ -22,9 +22,9 @@
       },
     },
     "playground": {
-      "name": "my-module-playground",
+      "name": "halograph-playground",
       "dependencies": {
-        "my-module": "latest",
+        "halograph": "workspace:*",
         "nuxt": "^4.3.0",
       },
     },
@@ -1190,9 +1190,9 @@
 
     "muggle-string": ["muggle-string@0.4.1", "", {}, "sha512-VNTrAak/KhO2i8dqqnqnAHOa3cYBwXEZe9h+D5h/1ZqFSTEFHdM65lR7RoIqq3tBBYavsOXV84NoHXZ0AkPyqQ=="],
 
-    "my-module": ["my-module@1.0.0", "", {}, "sha512-HVXnQnmqCsGAbflaM8qvKqI6F2U1LMW8ivjWXGqqOa/5hDZrH0+Vv8JFCcEJ5c8ZrHFm/zS6o/4kVrOfxky+4g=="],
+    "halograph": ["halograph@workspace:"],
 
-    "my-module-playground": ["my-module-playground@workspace:playground"],
+    "halograph-playground": ["halograph-playground@workspace:playground"],
 
     "nanoid": ["nanoid@5.1.6", "", { "bin": { "nanoid": "bin/nanoid.js" } }, "sha512-c7+7RQ+dMB5dPwwCp4ee1/iV/q2P6aK1mTZcfr1BTuVlyW9hJYiMPybJCcnBlQtuSmTIWNeazm/zqNoZSSElBg=="],
 

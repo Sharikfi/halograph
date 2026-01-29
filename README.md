@@ -19,14 +19,14 @@ Nuxt module that turns any image (including SVG) into a halftone: a grid of sing
 
 ## Features
 
-- **Halftone effects** — scale (dot size), opacity, or both
-- **Flexible coloring** — solid or gradient (2 or 3 colors); HEX, HSL, RGB(a), OKLCH
-- **Gradient control** — direction in degrees, 2- or 3-color mode
-- **Dot shapes** — circle, square, triangle
-- **Output** — canvas or PNG image
-- **CORS** — optional server proxy for external images
-- **Slots** — `#loading`, `#error`
-- **Performance** — `maxWidth`/`maxHeight`, Web Worker for large images (>512×512px), optional smoothing, trim, hideMinDots
+- **Halftone effects** - scale (dot size), opacity, or both
+- **Flexible coloring** - solid or gradient (2 or 3 colors); HEX, HSL, RGB(a), OKLCH
+- **Gradient control** - direction in degrees, 2- or 3-color mode
+- **Dot shapes** - circle, square, triangle
+- **Output** - canvas or PNG image
+- **CORS** - optional server proxy for external images
+- **Slots** - `#loading`, `#error`
+- **Performance** - `maxWidth`/`maxHeight`, Web Worker for large images (>512×512px), optional smoothing, trim, hideMinDots
 
 ## Installation
 
@@ -77,11 +77,11 @@ const halftoneOptions: HalftoneOptions = {
 
 | Prop      | Type                   | Default   | Description    |
 |-----------|------------------------|-----------|----------------|
-| `src`     | `string`               | —         | Image URL      |
-| `options` | `HalftoneOptions`      | —         | Effect options |
+| `src`     | `string`               | -         | Image URL      |
+| `options` | `HalftoneOptions`      | -         | Effect options |
 | `output`  | `'canvas' \| 'image'`  | `'canvas'`| Output format  |
 
-**Slots** — `#loading`, `#error` (receives `error`).
+**Slots** - `#loading`, `#error` (receives `error`).
 
 ### Composable
 
@@ -112,11 +112,11 @@ const pngUrl = toDataURL('image/png')
 | `effectType`    | `'scale' \| 'opacity' \| 'both'`     | `'scale'` | Brightness encoding   |
 | `color`         | `string`                | `'#000000'` | Dot color (HEX/RGB/HSL/OKLCH) |
 | `colorMode`     | `'solid' \| 'gradient2' \| 'gradient3'` | `'solid'` | Coloring mode   |
-| `gradientColors`| `[string, string]` or 3-tuple | —     | Gradient stops                 |
+| `gradientColors`| `[string, string]` or 3-tuple | -     | Gradient stops                 |
 | `gradientAngle` | `number`                | `90`      | Gradient direction (degrees)  |
 | `spacing`       | `number`                | auto      | Distance between dots (px)     |
-| `maxWidth`      | `number`                | —         | Max width for performance      |
-| `maxHeight`     | `number`                | —         | Max height for performance     |
+| `maxWidth`      | `number`                | -         | Max width for performance      |
+| `maxHeight`     | `number`                | -         | Max height for performance     |
 | `smoothing`     | `boolean`               | `false`   | Supersampling for antialiasing |
 | `trim`          | `boolean`               | `false`   | Crop canvas to content bounds (brightness > threshold) |
 | `hideMinDots`   | `boolean`               | `false`   | Do not draw dots at minimum size/opacity (by effect type) |

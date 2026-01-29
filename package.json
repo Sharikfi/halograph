@@ -49,6 +49,7 @@
     "node": ">=18"
   },
   "workspaces": [
+    ".",
     "playground"
   ],
   "scripts": {
