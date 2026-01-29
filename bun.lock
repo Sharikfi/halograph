@@ -1190,7 +1190,7 @@
 
     "muggle-string": ["muggle-string@0.4.1", "", {}, "sha512-VNTrAak/KhO2i8dqqnqnAHOa3cYBwXEZe9h+D5h/1ZqFSTEFHdM65lR7RoIqq3tBBYavsOXV84NoHXZ0AkPyqQ=="],
 
-    "halograph": ["halograph@workspace:"],
+    "halograph": ["halograph@workspace:."],
 
     "halograph-playground": ["halograph-playground@workspace:playground"],
 
