@@ -7,9 +7,23 @@ import {
   addServerHandler,
   createResolver,
 } from '@nuxt/kit'
+import type { Nuxt } from '@nuxt/schema'
 import { defu } from 'defu'
-import type { HalftoneOptions } from './runtime/types'
+import type {
+  HalftoneOptions,
+  HalftoneResult,
+  DotType,
+  EffectType,
+  ColorMode,
+} from './runtime/types'
 
+export type {
+  HalftoneOptions,
+  HalftoneResult,
+  DotType,
+  EffectType,
+  ColorMode,
+}
 export interface ModuleOptions {
   color?: string
   colorMode?: HalftoneOptions['colorMode']
@@ -35,7 +49,7 @@ export default defineNuxtModule<ModuleOptions>({
     effectType: 'scale',
     useProxy: false,
   },
-  setup(options, nuxt) {
+  setup(options: ModuleOptions, nuxt: Nuxt) {
     const resolver = createResolver(import.meta.url)
 
     const merged = defu(
