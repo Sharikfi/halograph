@@ -1,6 +1,6 @@
 {
   "name": "halograph",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Nuxt module for halftone effect: single-color dot grid from images (scale/opacity/both)",
   "repository": {
     "type": "git",

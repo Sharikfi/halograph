@@ -101,6 +101,7 @@ export interface HalftoneOptions {
   maxHeight?: number
   smoothing?: boolean
   trim?: boolean
+  hideMinDots?: boolean
 }
 
 export interface HalftoneResult {

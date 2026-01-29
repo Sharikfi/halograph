@@ -227,6 +227,16 @@
         </div>
 
         <div class="control-group">
+          <label>
+            <input
+              v-model="options.hideMinDots"
+              type="checkbox"
+            >
+            Hide min dots
+          </label>
+        </div>
+
+        <div class="control-group">
           <label>Output</label>
           <select v-model="output">
             <option value="canvas">
@@ -255,6 +265,7 @@ interface HalftoneOptions {
   maxHeight?: number
   smoothing?: boolean
   trim?: boolean
+  hideMinDots?: boolean
 }
 
 const imageSrc = ref('')
@@ -275,6 +286,7 @@ const options = ref<HalftoneOptions>({
   maxWidth: 600,
   smoothing: false,
   trim: false,
+  hideMinDots: false,
 })
 
 const computedOptions = computed(() => {

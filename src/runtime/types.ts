@@ -35,6 +35,7 @@ export interface PerformanceOptions {
 export interface ProcessingOptions {
   readonly spacing?: number
   readonly trim?: boolean
+  readonly hideMinDots?: boolean
 }
 
 /** Halftone effect options (dot shape, effect type, color, performance, etc.) */
@@ -50,6 +51,7 @@ export interface HalftoneOptions {
   readonly maxHeight?: number
   readonly smoothing?: boolean
   readonly trim?: boolean
+  readonly hideMinDots?: boolean
 }
 
 /** Result of halftone rendering: canvas and optional PNG data URL */

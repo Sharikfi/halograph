@@ -6,14 +6,18 @@ import { EffectStrategyFactory } from '../strategies/EffectStrategy'
 import { DotStrategyFactory } from '../strategies/DotStrategy'
 import { ColorStrategyFactory } from '../strategies/ColorStrategy'
 
+const HIDE_MIN_BRIGHTNESS_THRESHOLD = 0.01
+
 /** Renders a brightness grid to a halftone canvas using effect, dot, and color strategies */
 export class HalftoneRenderer {
+  private readonly options: HalftoneOptions
   private readonly effectStrategy: EffectStrategy
   private readonly dotStrategy: DotStrategy
   private readonly colorHandler: ColorStrategyHandler
 
   /** @param options - Halftone options used to build strategies */
   constructor(options: HalftoneOptions) {
+    this.options = options
     this.effectStrategy = EffectStrategyFactory.create(options.effectType)
     this.dotStrategy = DotStrategyFactory.create(options.dotType)
     this.colorHandler = ColorStrategyFactory.create({
@@ -54,6 +58,11 @@ export class HalftoneRenderer {
     for (let row = 0; row < grid.rows; row++) {
       for (let col = 0; col < grid.cols; col++) {
         const brightness = grid.data[row]?.[col] ?? 0
+
+        if (this.options.hideMinDots && brightness <= HIDE_MIN_BRIGHTNESS_THRESHOLD) {
+          continue
+        }
+
         const x = (col + 0.5) * params.stepX * scale
         const y = (row + 0.5) * params.stepY * scale
 

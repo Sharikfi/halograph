@@ -2,6 +2,8 @@ import type { DotType, EffectType, HalftoneOptions } from '../types'
 import { computeGridStep, sampleGridBrightness } from '../utils/canvas'
 import { HalftoneRenderer } from './HalftoneRenderer'
 
+const TRIM_BRIGHTNESS_THRESHOLD = 0.01
+
 /** Orchestrates grid sampling and halftone rendering from a source canvas */
 export class HalftoneProcessor {
   /**
@@ -18,7 +20,7 @@ export class HalftoneProcessor {
     const grid = sampleGridBrightness(sourceCanvas, params.stepX, params.stepY)
     const renderer = new HalftoneRenderer(options)
 
-    return renderer.render(
+    let canvas = renderer.render(
       {
         data: grid,
         rows: grid.length,
@@ -26,6 +28,67 @@ export class HalftoneProcessor {
       },
       params,
     )
+
+    if (options.trim) {
+      canvas = this.trimToContent(canvas, grid, params.stepX, params.stepY)
+    }
+
+    return canvas
+  }
+
+  /**
+   * Crops canvas to the bounding box of grid cells with brightness above threshold
+   * (i.e. cells where the dot is not at minimum size/opacity).
+   * @param canvas - Rendered halftone canvas
+   * @param grid - Brightness grid used for rendering
+   * @param stepX - Grid step X
+   * @param stepY - Grid step Y
+   * @param threshold - Brightness threshold 0–1 (default 0.01)
+   * @returns New canvas containing only the content region
+   */
+  static trimToContent(
+    canvas: HTMLCanvasElement,
+    grid: number[][],
+    stepX: number,
+    stepY: number,
+    threshold: number = TRIM_BRIGHTNESS_THRESHOLD,
+  ): HTMLCanvasElement {
+    const bounds = this.visibleBoundsFromGrid(grid, threshold)
+    const sx = bounds.minCol * stepX
+    const sy = bounds.minRow * stepY
+    const sw = (bounds.maxCol - bounds.minCol + 1) * stepX
+    const sh = (bounds.maxRow - bounds.minRow + 1) * stepY
+    return this.cropCanvas(canvas, sx, sy, sw, sh)
+  }
+
+  private static visibleBoundsFromGrid(
+    grid: number[][],
+    threshold: number,
+  ): { minCol: number, maxCol: number, minRow: number, maxRow: number } {
+    const rows = grid.length
+    const cols = grid[0]?.length ?? 0
+    let minCol = cols
+    let maxCol = -1
+    let minRow = rows
+    let maxRow = -1
+
+    for (let row = 0; row < rows; row++) {
+      for (let col = 0; col < cols; col++) {
+        const b = grid[row]?.[col] ?? 0
+        if (b > threshold) {
+          if (col < minCol) minCol = col
+          if (col > maxCol) maxCol = col
+          if (row < minRow) minRow = row
+          if (row > maxRow) maxRow = row
+        }
+      }
+    }
+
+    if (maxCol < minCol || maxRow < minRow) {
+      return { minCol: 0, maxCol: Math.max(0, cols - 1), minRow: 0, maxRow: Math.max(0, rows - 1) }
+    }
+
+    return { minCol, maxCol, minRow, maxRow }
   }
 
   static processWithSmoothing(
@@ -140,14 +203,16 @@ export class HalftoneProcessor {
     sw: number,
     sh: number,
   ): HTMLCanvasElement {
+    const w = Math.max(1, Math.round(sw))
+    const h = Math.max(1, Math.round(sh))
     const canvas = document.createElement('canvas')
-    canvas.width = sw
-    canvas.height = sh
+    canvas.width = w
+    canvas.height = h
 
     const ctx = canvas.getContext('2d')
     if (!ctx) throw new Error('Halograph: could not get 2d context')
 
-    ctx.drawImage(source, sx, sy, sw, sh, 0, 0, sw, sh)
+    ctx.drawImage(source, sx, sy, sw, sh, 0, 0, w, h)
     return canvas
   }
 }

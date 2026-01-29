@@ -9,8 +9,6 @@ Nuxt module that turns any image (including SVG) into a halftone: a grid of sing
 
 **Minimal dependencies, maximum performance.**
 
-[Changelog](CHANGELOG.md) | [Demo](playground/)
-
 ## Features
 
 - **Halftone effects** — scale (dot size), opacity, or both
@@ -20,7 +18,7 @@ Nuxt module that turns any image (including SVG) into a halftone: a grid of sing
 - **Output** — canvas or PNG image
 - **CORS** — optional server proxy for external images
 - **Slots** — `#loading`, `#error`
-- **Performance** — `maxWidth`/`maxHeight`, Web Worker for large images (>512×512px), optional smoothing and trim
+- **Performance** — `maxWidth`/`maxHeight`, Web Worker for large images (>512×512px), optional smoothing, trim, hideMinDots
 
 ## Installation
 
@@ -112,7 +110,8 @@ const pngUrl = toDataURL('image/png')
 | `maxWidth`      | `number`                | —         | Max width for performance      |
 | `maxHeight`     | `number`                | —         | Max height for performance     |
 | `smoothing`     | `boolean`               | `false`   | Supersampling for antialiasing |
-| `trim`          | `boolean`               | `false`   | Crop transparent edges         |
+| `trim`          | `boolean`               | `false`   | Crop canvas to content bounds (brightness > threshold) |
+| `hideMinDots`   | `boolean`               | `false`   | Do not draw dots at minimum size/opacity (by effect type) |
 
 ## Effect types
 
@@ -196,9 +195,15 @@ Improves quality at the cost of speed:
 ```
 
 ### Trim
-Reduces output size by cropping empty edges:
+Crops canvas to the bounding box of cells with brightness above threshold:
 ```typescript
 { trim: true }
+```
+
+### Hide min dots
+Skips drawing dots at minimum size (scale) or minimum opacity (opacity/both):
+```typescript
+{ hideMinDots: true }
 ```
 
 ## Exported types
@@ -221,7 +226,7 @@ MIT © 2025
 [npm-version-href]: https://npmjs.com/package/halograph
 [npm-downloads-src]: https://img.shields.io/npm/dm/halograph
 [npm-downloads-href]: https://npmjs.com/package/halograph
-[license-src]: https://img.shields.io/github/license/your-org/halograph
+[license-src]: https://img.shields.io/github/license/sharikfi/halograph
 [license-href]: LICENSE
 [nuxt-src]: https://img.shields.io/badge/Nuxt-v4-18181b
 [nuxt-href]: https://nuxt.com

@@ -129,7 +129,7 @@ export async function createHalftoneCanvasAsync(
   )
 
   if (options.trim) {
-    canvas = HalftoneProcessor.trimTransparent(canvas)
+    canvas = HalftoneProcessor.trimToContent(canvas, grid, stepX, stepY)
   }
 
   return canvas
