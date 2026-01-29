@@ -1,9 +1,17 @@
+<div align="center">
+  <img src="docs/logo.png" alt="Halograph" width="120" />
+</div>
+
+<div align="center">
+
 # Halograph
 
 [![npm version][npm-version-src]][npm-version-href]
 [![npm downloads][npm-downloads-src]][npm-downloads-href]
 [![License][license-src]][license-href]
 [![Nuxt][nuxt-src]][nuxt-href]
+
+</div>
 
 Nuxt module that turns any image (including SVG) into a halftone: a grid of single-color dots with even spacing. Brightness is encoded by dot size, opacity, or both.
 
