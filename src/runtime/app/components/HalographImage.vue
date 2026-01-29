@@ -41,9 +41,10 @@ import { toRef, watch, onMounted, onUpdated, ref } from 'vue'
 import { useHalograph } from '../composables/useHalograph'
 import type { HalftoneOptions } from '../../types'
 
-/** @param src - Image URL to render as halftone
- *  @param options - Halftone options
- *  @param output - 'canvas' (default) or 'image' (PNG data URL)
+/**
+ * @param src - Image URL to render as halftone
+ * @param options - Halftone options
+ * @param output - 'canvas' (default) or 'image' (PNG data URL)
  */
 const props = withDefaults(
   defineProps<{

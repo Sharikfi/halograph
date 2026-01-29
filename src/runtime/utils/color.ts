@@ -152,7 +152,10 @@ export function brightness(r: number, g: number, b: number): number {
 
 /**
  * Luminance from RGBA bytes, weighted by alpha.
- * @param r,g,b,a - RGBA in 0–255
+ * @param r - Red 0–255
+ * @param g - Green 0–255
+ * @param b - Blue 0–255
+ * @param a - Alpha 0–255
  * @returns Effective luminance 0–1
  */
 export function brightnessFromRgba(

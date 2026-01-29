@@ -39,7 +39,7 @@ class ProxyUrlResolver {
  * Composable that loads an image and renders it as halftone; reacts to src and options changes.
  * @param src - Image URL (ref or getter)
  * @param options - Halftone options (ref or getter)
- * @returns { result, error, isLoading, toDataURL }
+ * @returns Object with result, error, isLoading, and toDataURL
  */
 export function useHalograph<T extends HalftoneOptions = HalftoneOptions>(
   src: MaybeRefOrGetter<string>,
@@ -76,10 +76,12 @@ export function useHalograph<T extends HalftoneOptions = HalftoneOptions>(
       const processedResult = await HalftoneProcessor.process(url, opts)
       result.value = processedResult
       error.value = null
-    } catch (err) {
+    }
+    catch (err) {
       result.value = null
       error.value = err instanceof Error ? err : new Error(String(err))
-    } finally {
+    }
+    finally {
       isLoading.value = false
     }
   }

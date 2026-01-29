@@ -1,6 +1,5 @@
-import type { HalftoneOptions } from '../types'
-import type { DotType, EffectType } from '../types'
-import { CanvasManager, GridStepCalculator, computeGridStep, sampleGridBrightness } from '../utils/canvas'
+import type { DotType, EffectType, HalftoneOptions } from '../types'
+import { computeGridStep, sampleGridBrightness } from '../utils/canvas'
 import { HalftoneRenderer } from './HalftoneRenderer'
 
 /** Orchestrates grid sampling and halftone rendering from a source canvas */
