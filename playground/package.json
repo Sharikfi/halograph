@@ -8,7 +8,7 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
-    "halograph": "workspace:*",
+    "halograph": "file:..",
     "nuxt": "^4.3.0"
   }
 }
